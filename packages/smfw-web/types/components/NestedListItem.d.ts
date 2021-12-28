@@ -4,6 +4,7 @@ export interface NestedListItemProps {
     nested: boolean;
     depth: number;
     onClick: any;
+    classes: any;
 }
 declare function NestedListItem(props: NestedListItemProps): JSX.Element;
 export default NestedListItem;

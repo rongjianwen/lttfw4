@@ -50,7 +50,7 @@ function PopoverList(props: PopoverListProps) {
                     onClose={handleClose}
                     classes={{ paper: classes.popoverPaper }}
                 >
-                    <NestedList menu={menu} updateMenu={updateMenu} />
+                    <NestedList classes={classes} menu={menu} updateMenu={updateMenu} />
                 </Popover>
             )}
         </>

@@ -34,8 +34,10 @@ const theme = _.merge(
             width: '12rem'
         },
         navbar: {
-            backgroundColor: globals.secondaryBackgroundColor,
+            // backgroundColor: globals.secondaryBackgroundColor,
             color: '#fff'
+            // backgroundColorHover: globals.primaryBackgroundColor,
+            // colorHover: '#fff',
         },
         navbarPopoverPaper: {
             width: '12rem'
@@ -44,11 +46,15 @@ const theme = _.merge(
         sidebar: {
             width: '12rem',
             backgroundColor: globals.secondaryBackgroundColor,
-            color: '#fff'
+            color: '#fff',
+            backgroundColorHover: chroma(globals.secondaryBackgroundColor).brighten(0.4).hex(),
+            colorHover: '#fff'
         },
         extrabar: {
-            backgroundColor: globals.secondaryBackgroundColor,
+            // backgroundColor: globals.secondaryBackgroundColor,
             color: '#fff'
+            // backgroundColorHover: globals.primaryBackgroundColor,
+            // colorHover: '#fff',
         },
         extrabarMenu: {},
         extrabarPopoverPaper: {

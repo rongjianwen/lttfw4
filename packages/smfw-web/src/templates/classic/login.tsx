@@ -52,6 +52,12 @@ const template = {
                         },
                         buttonLabel: {
                             color: theme.extrabar.color
+                        },
+                        listItemButton: {
+                            '&:hover': {
+                                backgroundColor: theme.extrabar.backgroundColorHover,
+                                color: theme.extrabar.colorHover
+                            }
                         }
                     }));
                     const classes = useStyle();

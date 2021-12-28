@@ -8,10 +8,11 @@ import menuForeach from '../utils/menuForeach';
 export interface NestedListProps {
     menu: any;
     updateMenu: any;
+    classes: any;
 }
 
 function NestedList(props: NestedListProps) {
-    const { menu, updateMenu } = props;
+    const { menu, updateMenu, classes } = props;
 
     function handleClick(cm: any) {
         if (typeof cm.onClick === 'function') {
@@ -28,10 +29,22 @@ function NestedList(props: NestedListProps) {
         updateMenu(mm.id, { ...mm, open });
     }
 
+    const listClasses = {
+        root: classes.listRoot
+    };
+
     return (
-        <List component='nav' aria-labelledby='nested-list-subheader'>
+        <List classes={listClasses} component='nav' aria-labelledby='nested-list-subheader'>
             {menu.children.map((v: any, _i: number) => (
-                <NestedListItem onClick={handleClick} key={v.id} menu={v} open={v.open} nested depth={0} />
+                <NestedListItem
+                    onClick={handleClick}
+                    key={v.id}
+                    classes={classes}
+                    menu={v}
+                    open={v.open}
+                    nested={false}
+                    depth={0}
+                />
             ))}
         </List>
     );

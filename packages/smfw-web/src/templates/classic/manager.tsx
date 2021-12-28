@@ -172,7 +172,21 @@ const template = {
                     const updateMenu = (id: string, newMenu: any) => {
                         dispatch(sideMenuSlice.actions.updateMenu({ id, menu: newMenu }));
                     };
-                    return <NestedList menu={menu} updateMenu={updateMenu} />;
+
+                    const useStyles = makeStyles((theme: any) => ({
+                        nested: {
+                            paddingLeft: theme.spacing(2)
+                        },
+                        listRoot: {},
+                        listItemRoot: {},
+                        listItemButton: {
+                            '&:hover': {
+                                backgroundColor: theme.sidebar.backgroundColorHover
+                            }
+                        }
+                    }));
+                    const classes = useStyles();
+                    return <NestedList classes={classes} menu={menu} updateMenu={updateMenu} />;
                 }
             }
         ]
@@ -194,6 +208,12 @@ const template = {
                         },
                         buttonLabel: {
                             color: theme.extrabar.color
+                        },
+                        listItemButton: {
+                            '&:hover': {
+                                backgroundColor: theme.extrabar.backgroundColorHover,
+                                color: theme.extrabar.colorHover
+                            }
                         }
                     }));
                     const classes = useStyle();

@@ -1,13 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { List, ListItem, ListItemText, Icon, Collapse, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-    nested: {
-        paddingLeft: theme.spacing(2)
-    }
-}));
+import { List, ListItem, ListItemText, Icon, Collapse } from '@material-ui/core';
 
 export interface NestedListItemProps {
     menu: any;
@@ -15,29 +9,40 @@ export interface NestedListItemProps {
     nested: boolean;
     depth: number;
     onClick: any;
+    classes: any;
 }
 
 function NestedListItem(props: NestedListItemProps) {
-    const { menu, open, nested, depth, onClick } = props;
-    const classes = useStyles();
+    const { menu, open, nested, depth, onClick, classes } = props;
+
     const className = (classes as any).nested;
     const attrs: any = {};
-    if (typeof nested !== 'undefined') {
+    if (typeof nested !== 'undefined' && nested !== false) {
         attrs.className = className;
     }
+
+    const listClasses = {
+        root: classes.listRoot
+    };
+    const listItemClasses = {
+        root: classes.listItemRoot,
+        button: classes.listItemButton
+    };
+
     return (
         <div {...attrs}>
-            <ListItem button onClick={() => onClick(menu)}>
+            <ListItem classes={listItemClasses} button onClick={() => onClick(menu)}>
                 <ListItemText primary={menu.label} />
                 {!_.isEmpty(menu.children) && (open ? <Icon>expand_less</Icon> : <Icon>expand_more</Icon>)}
             </ListItem>
             {!_.isEmpty(menu.children) && (
                 <Collapse in={open} timeout='auto' unmountOnExit>
-                    <List component='div' disablePadding>
+                    <List classes={listClasses} component='div' disablePadding>
                         {menu.children.map((v: any, _i: number) => (
                             <NestedListItem
                                 onClick={onClick}
                                 key={v.id}
+                                classes={classes}
                                 menu={v}
                                 open={v.open}
                                 nested

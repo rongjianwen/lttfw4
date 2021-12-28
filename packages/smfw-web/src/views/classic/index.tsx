@@ -37,6 +37,12 @@ export const mNavMenuBar = {
                     },
                     buttonLabel: {
                         color: theme.navbar.color
+                    },
+                    listItemButton: {
+                        '&:hover': {
+                            backgroundColor: theme.extrabar.backgroundColorHover,
+                            color: theme.extrabar.colorHover
+                        }
                     }
                 }));
                 const classes = useStyle();
@@ -80,6 +86,12 @@ export const navMenuBar = {
                     },
                     buttonLabel: {
                         color: theme.navbar.color
+                    },
+                    listItemButton: {
+                        '&:hover': {
+                            backgroundColor: theme.extrabar.backgroundColorHover,
+                            color: theme.extrabar.colorHover
+                        }
                     }
                 }));
                 const classes = useStyle();
