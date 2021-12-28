@@ -8,6 +8,8 @@ import Panel from '../../components/Panel';
 import navMenuSlice from '../../slices/navMenu';
 import PopoverList from '../../components/PopoverList';
 
+import genClasses from '../../utils/genClasses';
+
 export const mNavMenuBar = {
     id: 'm-navMenuBar',
     props: {
@@ -38,21 +40,37 @@ export const mNavMenuBar = {
                     buttonLabel: {
                         color: theme.navbar.color
                     },
-                    listItemButton: {
+                    nested: {
+                        paddingLeft: theme.navbar.nestedPaddingLeft
+                    }
+                }));
+                const useMuiStyle = makeStyles((theme: any) => ({
+                    'list:root': {},
+                    'listItem:root': {},
+                    'listItem:button': {
                         '&:hover': {
                             backgroundColor: theme.extrabar.backgroundColorHover,
                             color: theme.extrabar.colorHover
                         }
                     }
                 }));
+
                 const classes = useStyle();
+                const muiClasses = useMuiStyle();
 
                 const menu = useSelector((state: any) => state.navMenu.mobileMenu);
                 const dispatch = useDispatch();
                 const updateMenu = (id: string, newMenu: any) => {
                     dispatch(navMenuSlice.actions.updateMobileMenu({ id, menu: newMenu }));
                 };
-                return <PopoverList menu={menu} updateMenu={updateMenu} classes={classes} />;
+                return (
+                    <PopoverList
+                        muiClasses={genClasses(muiClasses, ['list', 'listItem'])}
+                        classes={classes}
+                        menu={menu}
+                        updateMenu={updateMenu}
+                    />
+                );
             }
         }
     ]
@@ -87,7 +105,14 @@ export const navMenuBar = {
                     buttonLabel: {
                         color: theme.navbar.color
                     },
-                    listItemButton: {
+                    nested: {
+                        paddingLeft: theme.navbar.nestedPaddingLeft
+                    }
+                }));
+                const useMuiStyle = makeStyles((theme: any) => ({
+                    'list:root': {},
+                    'listItem:root': {},
+                    'listItem:button': {
                         '&:hover': {
                             backgroundColor: theme.extrabar.backgroundColorHover,
                             color: theme.extrabar.colorHover
@@ -95,6 +120,7 @@ export const navMenuBar = {
                     }
                 }));
                 const classes = useStyle();
+                const muiClasses = useMuiStyle();
 
                 const menu = useSelector((state: any) => state.navMenu.menu);
                 const dispatch = useDispatch();
@@ -103,7 +129,13 @@ export const navMenuBar = {
                 };
                 if (!_.isEmpty(menu.children)) {
                     return menu.children.map((v: any, _i: number) => (
-                        <PopoverList key={v.id} menu={v} updateMenu={updateMenu} classes={classes} />
+                        <PopoverList
+                            muiClasses={genClasses(muiClasses, ['list', 'listItem'])}
+                            classes={classes}
+                            key={v.id}
+                            menu={v}
+                            updateMenu={updateMenu}
+                        />
                     ));
                 }
                 return null;

@@ -9,10 +9,11 @@ export interface PopoverListProps {
     menu: any;
     updateMenu: any;
     classes: any;
+    muiClasses: any;
 }
 
 function PopoverList(props: PopoverListProps) {
-    const { menu, updateMenu, classes } = props;
+    const { menu, updateMenu, classes, muiClasses } = props;
     const [anchorEl, setAnchorEl] = useState(null);
     const { open } = menu;
     const id = open ? menu.id : undefined;
@@ -50,7 +51,7 @@ function PopoverList(props: PopoverListProps) {
                     onClose={handleClose}
                     classes={{ paper: classes.popoverPaper }}
                 >
-                    <NestedList classes={classes} menu={menu} updateMenu={updateMenu} />
+                    <NestedList muiClasses={muiClasses} classes={classes} menu={menu} updateMenu={updateMenu} />
                 </Popover>
             )}
         </>

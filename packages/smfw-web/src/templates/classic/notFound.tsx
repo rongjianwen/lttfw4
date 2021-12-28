@@ -11,6 +11,8 @@ import extraMenuSlice from '../../slices/extraMenu';
 
 import * as classicViews from '../../views/classic';
 
+import genClasses from '../../utils/genClasses';
+
 const template = {
     __layout: 'basic',
     logo: {
@@ -51,7 +53,14 @@ const template = {
                         buttonLabel: {
                             color: theme.extrabar.color
                         },
-                        listItemButton: {
+                        nested: {
+                            paddingLeft: theme.extrabar.nestedPaddingLeft
+                        }
+                    }));
+                    const useMuiStyles = makeStyles((theme: any) => ({
+                        'list:root': {},
+                        'listItem:root': {},
+                        'listItem:button': {
                             '&:hover': {
                                 backgroundColor: theme.extrabar.backgroundColorHover,
                                 color: theme.extrabar.colorHover
@@ -59,13 +68,21 @@ const template = {
                         }
                     }));
                     const classes = useStyle();
+                    const muiClasses = useMuiStyles();
 
                     const menu = useSelector((state: any) => state.extraMenu.menu);
                     const dispatch = useDispatch();
                     const updateMenu = (id: string, newMenu: any) => {
                         dispatch(extraMenuSlice.actions.updateMenu({ id, menu: newMenu }));
                     };
-                    return <PopoverList menu={menu} updateMenu={updateMenu} classes={classes} />;
+                    return (
+                        <PopoverList
+                            muiClasses={genClasses(muiClasses, ['list', 'listItem'])}
+                            classes={classes}
+                            menu={menu}
+                            updateMenu={updateMenu}
+                        />
+                    );
                 }
             }
         ]

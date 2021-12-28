@@ -10,10 +10,11 @@ export interface NestedListItemProps {
     depth: number;
     onClick: any;
     classes: any;
+    muiClasses: any;
 }
 
 function NestedListItem(props: NestedListItemProps) {
-    const { menu, open, nested, depth, onClick, classes } = props;
+    const { menu, open, nested, depth, onClick, classes, muiClasses } = props;
 
     const className = (classes as any).nested;
     const attrs: any = {};
@@ -21,27 +22,20 @@ function NestedListItem(props: NestedListItemProps) {
         attrs.className = className;
     }
 
-    const listClasses = {
-        root: classes.listRoot
-    };
-    const listItemClasses = {
-        root: classes.listItemRoot,
-        button: classes.listItemButton
-    };
-
     return (
         <div {...attrs}>
-            <ListItem classes={listItemClasses} button onClick={() => onClick(menu)}>
+            <ListItem classes={muiClasses.listItem} button onClick={() => onClick(menu)}>
                 <ListItemText primary={menu.label} />
                 {!_.isEmpty(menu.children) && (open ? <Icon>expand_less</Icon> : <Icon>expand_more</Icon>)}
             </ListItem>
             {!_.isEmpty(menu.children) && (
                 <Collapse in={open} timeout='auto' unmountOnExit>
-                    <List classes={listClasses} component='div' disablePadding>
+                    <List classes={muiClasses.list} component='div' disablePadding>
                         {menu.children.map((v: any, _i: number) => (
                             <NestedListItem
                                 onClick={onClick}
                                 key={v.id}
+                                muiClasses={muiClasses}
                                 classes={classes}
                                 menu={v}
                                 open={v.open}

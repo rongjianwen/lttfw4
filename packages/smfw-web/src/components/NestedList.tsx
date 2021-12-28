@@ -9,10 +9,11 @@ export interface NestedListProps {
     menu: any;
     updateMenu: any;
     classes: any;
+    muiClasses: any;
 }
 
 function NestedList(props: NestedListProps) {
-    const { menu, updateMenu, classes } = props;
+    const { menu, updateMenu, classes, muiClasses } = props;
 
     function handleClick(cm: any) {
         if (typeof cm.onClick === 'function') {
@@ -29,16 +30,13 @@ function NestedList(props: NestedListProps) {
         updateMenu(mm.id, { ...mm, open });
     }
 
-    const listClasses = {
-        root: classes.listRoot
-    };
-
     return (
-        <List classes={listClasses} component='nav' aria-labelledby='nested-list-subheader'>
+        <List classes={muiClasses.list} component='nav' aria-labelledby='nested-list-subheader'>
             {menu.children.map((v: any, _i: number) => (
                 <NestedListItem
                     onClick={handleClick}
                     key={v.id}
+                    muiClasses={muiClasses}
                     classes={classes}
                     menu={v}
                     open={v.open}

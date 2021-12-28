@@ -10,6 +10,7 @@ declare const theme: import("@material-ui/core").Theme & {
     };
     navbar: {
         color: string;
+        nestedPaddingLeft: string;
     };
     navbarPopoverPaper: {
         width: string;
@@ -17,13 +18,17 @@ declare const theme: import("@material-ui/core").Theme & {
     navMenu: {};
     sidebar: {
         width: string;
+        paddingTop: number;
+        paddingButtom: number;
         backgroundColor: string;
         color: string;
         backgroundColorHover: string;
         colorHover: string;
+        nestedPaddingLeft: string;
     };
     extrabar: {
         color: string;
+        nestedPaddingLeft: string;
     };
     extrabarMenu: {};
     extrabarPopoverPaper: {
